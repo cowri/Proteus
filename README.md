@@ -8,7 +8,7 @@ A reference implementation of the Proteus algorithm can be found in [`contracts/
 
 ## Functions
 
-There are three main functions in [`DemoPool.sol`]((./contracts/DemoPool.sol)) that correspond to the main pool actions
+There are three main functions in [`DemoPool.sol`](./contracts/DemoPool.sol) that correspond to the main pool actions
 
 ### Deposit
 ```solidity
@@ -62,7 +62,7 @@ The example code snippet above demonstrates the process of deploying a pool with
 
 The shape of the bonding curve can be modified by altering `curveParams`, an array of six values that correspond to the six coefficients of the conic section. 
 
-Use the `deposit`, `withdraw`, and `swap` JavaScript functions provided in [`DemoPool.js`]((./contracts/DemoPool.sol)) along with various values for `balances` and `inputData` to experiment with different pool queries.
+Use the `deposit`, `withdraw`, and `swap` JavaScript functions provided in [`DemoPool.js`](./scripts/DemoPool.js) along with various values for `balances` and `inputData` to experiment with different pool queries.
 
 To view a sample result for each type of query, running the demo script using 
 ```shell
