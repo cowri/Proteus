@@ -6,7 +6,9 @@ This is a demonstration repository of Shell Protocol's new [Proteus AMM Engine](
 
 A reference implementation of the Proteus algorithm can be found in [`contracts/DemoPool.sol`](./contracts/DemoPool.sol). There is also a copy of the [white paper](./Proteus_AMM_Engine_-_Shell_v2_Part_1.pdf). The deployed smart contract can be queried to receive quotes on various pool actions (e.g. swap, deposit, and withdraw). A sample script has been provided in [`scripts/DemoPool.js`](./scripts/DemoPool.js) to deploy and interact with the contract via Hardhat.
 
-## Functions
+Note that the smart contract implementation of Proteus is stateless and does not preserve the pool balances in between calls. A stateful Proteus implementation has been written in Python and can be found in [`proteus.py`](./proteus.py).
+
+## Smart Contract Functions
 
 There are three main functions in [`DemoPool.sol`](./contracts/DemoPool.sol) that correspond to the main pool actions
 
@@ -48,6 +50,8 @@ Given the pool's current balances and the amount of a token to be swapped, this 
 
 ## Usage
 
+### Javascript
+
 `DemoPool.js` contains helpful functions that enable interaction with the Solidity smart contract in minimal lines of code. 
 
 ```javascript
@@ -72,6 +76,28 @@ npm run demo
 note that to use the project you must first run
 ```shell
 npm install
+```
+
+### Python
+
+`proteus.py` contains a similar interface to `DemoPool.js` that allows for experimentation with a stateful Proteus pool.
+
+```python
+curve_params = [0, 1, 0, 0, 0, -10000]
+proteus = Proteus(curve_params)
+pool = Pool(curve=proteus, x_fee=0, y_fee=0, x_bal=1000, y_bal=1000)
+
+pool.swap(amount=100, token=0)
+```
+
+The example code snippet above demonstrates the process of deploying a pool with an initial parameter set and executing a swap against the pool's reserves. Note that the starting LP token supply is initialized to the sum of the starting token balances.
+
+Interact with the pool using its `deposit`, `withdraw`, and `swap` functions using values for `amount` and `token` to execute various pool actions. 
+The pool state can be printed to the console at any time by invoking the pool's `print_balances` function.
+
+Run the script from the root directory using
+```shell
+python proteus.py
 ```
 
 ## Disclaimer
